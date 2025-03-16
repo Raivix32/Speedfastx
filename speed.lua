@@ -1,15 +1,15 @@
 local speed = 100
 local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
 
-local function changeSpeed()
+local function changeSpeed(character)
+    local humanoid = character:WaitForChild("Humanoid")
     humanoid.WalkSpeed = speed
 end
 
 player.CharacterAdded:Connect(function(character)
-    humanoid = character:WaitForChild("Humanoid")
-    changeSpeed()
+    changeSpeed(character)
 end)
 
-changeSpeed()
+if player.Character then
+    changeSpeed(player.Character)
+end
